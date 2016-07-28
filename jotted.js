@@ -4,39 +4,6 @@
   (global.Jotted = factory());
 }(this, function () { 'use strict';
 
-  var babelHelpers = {};
-  babelHelpers.typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
-  };
-
-  babelHelpers.classCallCheck = function (instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  };
-
-  babelHelpers.createClass = function () {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i];
-        descriptor.enumerable = descriptor.enumerable || false;
-        descriptor.configurable = true;
-        if ("value" in descriptor) descriptor.writable = true;
-        Object.defineProperty(target, descriptor.key, descriptor);
-      }
-    }
-
-    return function (Constructor, protoProps, staticProps) {
-      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-      if (staticProps) defineProperties(Constructor, staticProps);
-      return Constructor;
-    };
-  }();
-
-  babelHelpers;
-
   /* util
    */
 
@@ -208,15 +175,15 @@
     // try the file extension
     for (var key in modemap) {
       var keyLength = key.length;
-      if (file.slice(- keyLength++) === '.' + key) {
+      if (file.slice(-keyLength++) === '.' + key) {
         return modemap[key];
       }
     }
 
     // try the file type (html/css/js)
-    for (var key in modemap) {
-      if (type === key) {
-        return modemap[key];
+    for (var _key in modemap) {
+      if (type === _key) {
+        return modemap[_key];
       }
     }
 
@@ -276,6 +243,36 @@
     return 'There was an error loading <strong>' + url + '</strong>.';
   }
 
+  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
+  };
+
+  var classCallCheck = function (instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  };
+
+  var createClass = function () {
+    function defineProperties(target, props) {
+      for (var i = 0; i < props.length; i++) {
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+      }
+    }
+
+    return function (Constructor, protoProps, staticProps) {
+      if (protoProps) defineProperties(Constructor.prototype, protoProps);
+      if (staticProps) defineProperties(Constructor, staticProps);
+      return Constructor;
+    };
+  }();
+
   var plugins = [];
 
   function find(id) {
@@ -302,12 +299,12 @@
 
     this._get('options').plugins.forEach(function (plugin) {
       // check if plugin definition is string or object
-      var Plugin = undefined;
-      var pluginName = undefined;
+      var Plugin = void 0;
+      var pluginName = void 0;
       var pluginOptions = {};
       if (typeof plugin === 'string') {
         pluginName = plugin;
-      } else if ((typeof plugin === 'undefined' ? 'undefined' : babelHelpers.typeof(plugin)) === 'object') {
+      } else if ((typeof plugin === 'undefined' ? 'undefined' : _typeof(plugin)) === 'object') {
         pluginName = plugin.name;
         pluginOptions = plugin.options || {};
       }
@@ -321,13 +318,13 @@
 
   var PubSoup = function () {
     function PubSoup() {
-      babelHelpers.classCallCheck(this, PubSoup);
+      classCallCheck(this, PubSoup);
 
       this.topics = {};
       this.callbacks = {};
     }
 
-    babelHelpers.createClass(PubSoup, [{
+    createClass(PubSoup, [{
       key: 'find',
       value: function find(query) {
         this.topics[query] = this.topics[query] || [];
@@ -435,7 +432,7 @@
 
   var PluginRender = function () {
     function PluginRender(jotted, options) {
-      babelHelpers.classCallCheck(this, PluginRender);
+      classCallCheck(this, PluginRender);
 
       options = extend(options, {});
 
@@ -467,7 +464,7 @@
       this.$resultFrame = $resultFrame;
     }
 
-    babelHelpers.createClass(PluginRender, [{
+    createClass(PluginRender, [{
       key: 'template',
       value: function template() {
         var style = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
@@ -539,7 +536,7 @@
 
   var PluginScriptless = function () {
     function PluginScriptless(jotted, options) {
-      babelHelpers.classCallCheck(this, PluginScriptless);
+      classCallCheck(this, PluginScriptless);
 
       options = extend(options, {});
 
@@ -553,7 +550,7 @@
       this.runScriptTypes = runScriptTypes;
     }
 
-    babelHelpers.createClass(PluginScriptless, [{
+    createClass(PluginScriptless, [{
       key: 'change',
       value: function change(params, callback) {
         if (params.type !== 'html') {
@@ -590,7 +587,7 @@
 
   var PluginAce = function () {
     function PluginAce(jotted, options) {
-      babelHelpers.classCallCheck(this, PluginAce);
+      classCallCheck(this, PluginAce);
 
       var priority = 1;
       var i;
@@ -629,7 +626,7 @@
       jotted.on('change', this.change.bind(this), priority);
     }
 
-    babelHelpers.createClass(PluginAce, [{
+    createClass(PluginAce, [{
       key: 'editorChange',
       value: function editorChange(params) {
         var _this = this;
@@ -664,7 +661,7 @@
 
   var PluginCodeMirror = function () {
     function PluginCodeMirror(jotted, options) {
-      babelHelpers.classCallCheck(this, PluginCodeMirror);
+      classCallCheck(this, PluginCodeMirror);
 
       var priority = 1;
       var i;
@@ -700,7 +697,7 @@
       jotted.on('change', this.change.bind(this), priority);
     }
 
-    babelHelpers.createClass(PluginCodeMirror, [{
+    createClass(PluginCodeMirror, [{
       key: 'editorChange',
       value: function editorChange(params) {
         var _this = this;
@@ -736,7 +733,7 @@
 
   var PluginLess = function () {
     function PluginLess(jotted, options) {
-      babelHelpers.classCallCheck(this, PluginLess);
+      classCallCheck(this, PluginLess);
 
       var priority = 20;
 
@@ -753,7 +750,7 @@
       jotted.on('change', this.change.bind(this), priority);
     }
 
-    babelHelpers.createClass(PluginLess, [{
+    createClass(PluginLess, [{
       key: 'isLess',
       value: function isLess(params) {
         if (params.type !== 'css') {
@@ -789,7 +786,7 @@
 
   var PluginCoffeeScript = function () {
     function PluginCoffeeScript(jotted, options) {
-      babelHelpers.classCallCheck(this, PluginCoffeeScript);
+      classCallCheck(this, PluginCoffeeScript);
 
       var priority = 20;
 
@@ -806,7 +803,7 @@
       jotted.on('change', this.change.bind(this), priority);
     }
 
-    babelHelpers.createClass(PluginCoffeeScript, [{
+    createClass(PluginCoffeeScript, [{
       key: 'isCoffee',
       value: function isCoffee(params) {
         if (params.type !== 'js') {
@@ -835,7 +832,7 @@
 
   var PluginStylus = function () {
     function PluginStylus(jotted, options) {
-      babelHelpers.classCallCheck(this, PluginStylus);
+      classCallCheck(this, PluginStylus);
 
       var priority = 20;
 
@@ -852,7 +849,7 @@
       jotted.on('change', this.change.bind(this), priority);
     }
 
-    babelHelpers.createClass(PluginStylus, [{
+    createClass(PluginStylus, [{
       key: 'isStylus',
       value: function isStylus(params) {
         if (params.type !== 'css') {
@@ -888,7 +885,7 @@
 
   var PluginBabel = function () {
     function PluginBabel(jotted, options) {
-      babelHelpers.classCallCheck(this, PluginBabel);
+      classCallCheck(this, PluginBabel);
 
       var priority = 20;
 
@@ -913,7 +910,7 @@
       jotted.on('change', this.change.bind(this), priority);
     }
 
-    babelHelpers.createClass(PluginBabel, [{
+    createClass(PluginBabel, [{
       key: 'change',
       value: function change(params, callback) {
         // only parse js content
@@ -937,7 +934,7 @@
 
   var PluginMarkdown = function () {
     function PluginMarkdown(jotted, options) {
-      babelHelpers.classCallCheck(this, PluginMarkdown);
+      classCallCheck(this, PluginMarkdown);
 
       var priority = 20;
 
@@ -956,7 +953,7 @@
       jotted.on('change', this.change.bind(this), priority);
     }
 
-    babelHelpers.createClass(PluginMarkdown, [{
+    createClass(PluginMarkdown, [{
       key: 'change',
       value: function change(params, callback) {
         // only parse html content
@@ -980,7 +977,7 @@
 
   var PluginConsole = function () {
     function PluginConsole(jotted, options) {
-      babelHelpers.classCallCheck(this, PluginConsole);
+      classCallCheck(this, PluginConsole);
 
       options = extend(options, {
         autoClear: false
@@ -1048,7 +1045,7 @@
       this.contentCache = contentCache;
     }
 
-    babelHelpers.createClass(PluginConsole, [{
+    createClass(PluginConsole, [{
       key: 'getMessage',
       value: function getMessage(e) {
         // only catch messages from the iframe
@@ -1228,7 +1225,7 @@
 
   var PluginPlay = function () {
     function PluginPlay(jotted, options) {
-      babelHelpers.classCallCheck(this, PluginPlay);
+      classCallCheck(this, PluginPlay);
 
       options = extend(options, {
         firstRun: true
@@ -1277,7 +1274,7 @@
       this.jotted = jotted;
     }
 
-    babelHelpers.createClass(PluginPlay, [{
+    createClass(PluginPlay, [{
       key: 'change',
       value: function change(params, callback) {
         // always cache the latest code
@@ -1332,7 +1329,7 @@
 
   var Jotted = function () {
     function Jotted($jottedContainer, opts) {
-      babelHelpers.classCallCheck(this, Jotted);
+      classCallCheck(this, Jotted);
 
       if (!$jottedContainer) {
         throw new Error('Can\'t find Jotted container.');
@@ -1405,8 +1402,8 @@
 
       var _arr = ['html', 'css', 'js'];
       for (var _i = 0; _i < _arr.length; _i++) {
-        var type = _arr[_i];
-        this.markup(type);
+        var _type = _arr[_i];
+        this.markup(_type);
       }
 
       // textarea change events.
@@ -1431,8 +1428,8 @@
       // load files
       var _arr2 = ['html', 'css', 'js'];
       for (var _i2 = 0; _i2 < _arr2.length; _i2++) {
-        var type = _arr2[_i2];
-        this.load(type);
+        var _type2 = _arr2[_i2];
+        this.load(_type2);
       }
 
       // show all tabs, even if empty
@@ -1446,7 +1443,7 @@
       }
     }
 
-    babelHelpers.createClass(Jotted, [{
+    createClass(Jotted, [{
       key: 'findFile',
       value: function findFile(type) {
         var file = {};

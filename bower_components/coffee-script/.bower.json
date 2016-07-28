@@ -31,8 +31,7 @@
     "tag": "1.10.0",
     "commit": "f26d33d418dcdcfcc6ad3ab774d9cabbf7af659c"
   },
-  "_source": "git://github.com/jashkenas/coffeescript.git",
+  "_source": "https://github.com/jashkenas/coffeescript.git",
   "_target": "~1.10.0",
-  "_originalSource": "coffeescript",
-  "_direct": true
+  "_originalSource": "coffeescript"
 }

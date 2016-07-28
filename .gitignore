@@ -2,3 +2,9 @@
 build/
 sauce_connect.log
 *.kate-swp
+jotted.js
+jotted.js.map
+jotted.min.js
+jotted.css
+jotted.min.css
+bower_components

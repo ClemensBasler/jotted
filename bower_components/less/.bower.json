@@ -29,7 +29,7 @@
     "tag": "v2.5.3",
     "commit": "8381b13c3a22f643eac7c54ddfb6cbe70d76a1df"
   },
-  "_source": "git://github.com/less/less.git",
+  "_source": "https://github.com/less/less.git",
   "_target": "~2.5.0",
   "_originalSource": "less"
 }
